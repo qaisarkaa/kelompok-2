@@ -2,7 +2,6 @@
 #include <string.h>
 
 int main() {
-    // 1. VARIABEL & DATA MENU
     char namaPembeli[50], namaMetode[20];
     int pilihan, jumlah, total = 0, caraBayar, diskon = 0;
     char lanjut;
@@ -13,7 +12,6 @@ int main() {
     fgets(namaPembeli, sizeof(namaPembeli), stdin);
     namaPembeli[strcspn(namaPembeli, "\n")] = '\0';
 
-    // 2. PROSES PEMESANAN
     do {
         printf("\n--- MENU MAKANAN ---\n");
         printf("1. Nasi Goreng  (Rp 15.000)\n");
@@ -27,7 +25,6 @@ int main() {
         printf("Jumlah porsi: ");
         scanf("%d", &jumlah);
 
-        // Menghitung subtotal per item yang dipilih
         int harga = 0;
         if (pilihan == 1) harga = 15000;
         else if (pilihan == 2) harga = 12000;
@@ -41,12 +38,10 @@ int main() {
         scanf(" %c", &lanjut);
     } while (lanjut == 'y' || lanjut == 'Y');
 
-    // 3. LOGIKA DISKON (Jika belanja > 50rb)
     if (total >= 50000) {
-        diskon = total * 0.1; // Diskon 10%
+        diskon = total * 0.1; 
     }
 
-    // 4. METODE PEMBAYARAN
     printf("\n--- METODE BAYAR ---\n");
     printf("1. Cash (Tunai)\n");
     printf("2. QRIS (Digital)\n");
@@ -56,8 +51,7 @@ int main() {
     if (caraBayar == 1) strcpy(namaMetode, "Cash");
     else strcpy(namaMetode, "QRIS");
 
-    // 5. MENAMPILKAN HASIL & SIMPAN KE FILE
-    file = fopen("struk_kantin.txt", "a"); // 'a' artinya data baru akan nambah di bawah (append)
+    file = fopen("struk_kantin.txt", "a"); 
 
     printf("\n========================\n");
     printf("   STRUK PEMBAYARAN\n");
@@ -69,7 +63,6 @@ int main() {
     printf("Metode    : %s\n", namaMetode);
     printf("========================\n");
 
-    // Tulis ke file
     fprintf(file, "Nama: %s | Total: %d | Diskon: %d | Akhir: %d | Metode: %s\n", 
             namaPembeli, total, diskon, total - diskon, namaMetode);
     
